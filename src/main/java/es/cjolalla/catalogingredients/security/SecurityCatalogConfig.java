@@ -66,6 +66,7 @@ public class SecurityCatalogConfig extends WebSecurityConfigurerAdapter{
 		http
         .csrf().disable()
         .authorizeRequests()
+        	//Spring Boot will, by default, permit access to /css/**, /js/**, /images/**, and /**/favicon.ico
         	.antMatchers("/console", "/console/**", "/info","/httptrace", "/").permitAll() 
         	.anyRequest().authenticated()
         .and()
@@ -73,7 +74,11 @@ public class SecurityCatalogConfig extends WebSecurityConfigurerAdapter{
         .and()
         .httpBasic() //permitir autenticacion basica
         .and()
-        .formLogin(); //permitir autenticacion con formulario tambien
+        .formLogin() //permitir autenticacion con formulario tambien (el index tendra un formulario y la accion que autenticara sera perfom_login)
+        	.loginPage("/index.html")
+        	.permitAll()
+        	.loginProcessingUrl("/perform_login") //Por defecto la url de spring boot para esto es /login. La sobreescribimos
+        	.defaultSuccessUrl("/index.html", false); //Si pusiera true de segundo parametro iria siempre a esta pagina despues de autenticarse aunque estuvieran intentando acceder a otra 
 		
 //	    http
 //	    .csrf().disable()
