@@ -66,7 +66,7 @@ public class SecurityCatalogConfig extends WebSecurityConfigurerAdapter{
 		http
         .csrf().disable()
         .authorizeRequests()
-        	.antMatchers("/console", "/console/**", "/info","/httptrace").permitAll() 
+        	.antMatchers("/console", "/console/**", "/info","/httptrace", "/").permitAll() 
         	.anyRequest().authenticated()
         .and()
         .headers().frameOptions().disable() //Esta linea hace falta para que se muestre la consla de h2 /console si esta configurada en el propoerties

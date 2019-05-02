@@ -24853,7 +24853,7 @@ function (_React$Component) {
     value: function render() {
       return React.createElement("div", {
         "class": "hola"
-      });
+      }, "Soy la pagina de inicio de prueba");
     }
   }]);
 

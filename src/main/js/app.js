@@ -15,6 +15,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<div class="hola">
+				Soy la pagina de inicio de prueba
             </div>
 		)
 	}
