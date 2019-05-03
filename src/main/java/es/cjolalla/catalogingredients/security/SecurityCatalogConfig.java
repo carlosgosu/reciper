@@ -78,7 +78,7 @@ public class SecurityCatalogConfig extends WebSecurityConfigurerAdapter{
         	.loginPage("/index.html")
         	.permitAll()
         	.loginProcessingUrl("/perform_login") //Por defecto la url de spring boot para esto es /login. La sobreescribimos
-        	.defaultSuccessUrl("/index.html", false); //Si pusiera true de segundo parametro iria siempre a esta pagina despues de autenticarse aunque estuvieran intentando acceder a otra 
+        	.defaultSuccessUrl("/", false); //Si pusiera true de segundo parametro iria siempre a esta pagina despues de autenticarse aunque estuvieran intentando acceder a otra 
 		
 //	    http
 //	    .csrf().disable()

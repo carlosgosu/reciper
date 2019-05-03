@@ -1,11 +1,15 @@
 'use strict';
 
 // tag::vars[]
+//import 'bootstrap/dist/css/bootstrap.min.css'; <- Lo hemos metido en el head de index.html Da problemas al construirlo si lo meto en el package.json
 //Forma antigua con require. Forma nueva con import
 const React = require('react');
 const ReactDOM = require('react-dom');
 import {Fragment} from 'react';
 import Login from './Login';
+
+import {Container, Row, Col} from 'react-bootstrap';
+
 
 // end::vars[]
 
@@ -17,14 +21,15 @@ class App extends React.Component {
 	}
 
 	render() {
-		//Los componentes JSX no se pueden devolver directamente en el return. Siempre tienen que estar dentro de algun contenedor (un <div> por ejemplo). Para saltarnos esa limitacion usamos Fragment
+		//Los componentes JSX no se pueden devolver directamente en el return. Siempre tienen que estar dentro de algun contenedor (un <div> por ejemplo). Para saltarnos esa limitacion usamos <Fragment> o <Container> de react-bootstrap
 		return (
-			<Fragment>
-			<div class="hola">
-				Soy la pagina de inicio de prueba
-				<Login/>
-            </div>
-            </Fragment>
+			<Container>
+				<Row>
+					<Col xs sm md lg={{ span: 6, offset: 3 }}>
+						<Login />
+					</Col>
+				</Row>
+			</Container>
 		)
 	}
 }
