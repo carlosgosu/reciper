@@ -1,5 +1,7 @@
 package es.cjolalla.catalogingredients.usuarios;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,7 +10,7 @@ import javax.persistence.Table;
 //Son los roles o authorities
 @Entity
 @Table(name="permiso")
-public class Permiso {
+public class Permiso implements Serializable{
 
 	@Id
 	@Column(name="idPermiso")

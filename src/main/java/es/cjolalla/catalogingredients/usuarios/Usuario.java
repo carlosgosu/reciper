@@ -1,5 +1,6 @@
 package es.cjolalla.catalogingredients.usuarios;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,7 +37,7 @@ import javax.persistence.Table;
 	            )
 	    }
 	)
-public class Usuario {
+public class Usuario implements Serializable{
 
 	@Id
 	private String usuario;

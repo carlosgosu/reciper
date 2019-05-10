@@ -28,10 +28,22 @@
           </div>
         </div>
 	</div>
-
-	<div id="react"></div>
-
-	<script th:src="@{/js/jquery-3.4.1.min.js}" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<form class="form-signin" method="post" action="/reciper/login">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <p>
+          <label for="username" class="sr-only">Username</label>
+          <input id="username" name="username" class="form-control" placeholder="Username" required="" autofocus="" type="text">
+        </p>
+        <p>
+          <label for="password" class="sr-only">Password</label>
+          <input id="password" name="password" class="form-control" placeholder="Password" required="" type="password">
+        </p>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+      
+    <div id="react"></div>
+      
+    <script th:src="@{/js/jquery-3.4.1.min.js}" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script th:src="@{/js/bootstrap.bundle.min.js}" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script src="built/bundle.js"></script>
 </body>

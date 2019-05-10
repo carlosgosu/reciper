@@ -38,7 +38,7 @@ public class IngredienteRestController {
 	}
 	
 	@GetMapping(value= "/ingredientes")
-	@PreAuthorize("hasRole('ADMIN') or hasAuthority('READ_INGREDIENTES')")
+//	@PreAuthorize("hasRole('ADMIN') or hasAuthority('READ_INGREDIENTES')")
 	public List<IngredienteDTO> getAllIngredientes(Authentication authentication) {
 		//Para imprimir todos los permisos que tiene (y el perfil que tambien es una granted authority)
 		//logger.info(authentication.getAuthorities().stream().map(auth -> auth.getAuthority()).collect(Collectors.joining(", ","{","}")));

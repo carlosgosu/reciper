@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<link
+  		rel="stylesheet"
+  		th:href="@{/css/bootstrap.min.css}"
+  		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  		crossorigin="anonymous"/>
+	</head>
+	<body th:fragment="header">
+		<div class="container">
+			<nav class="navbar navbar-fixed-top navbar-light bg-light navbar-toggleable-md">
+		        <a class="navbar-brand" href="#">Reciper</a>
+	        	<ul class="navbar-nav flex-row mr-auto">
+	            	<li class="nav-item px-3">
+	              		<a class="nav-link" href="#" th:href="@{/}">Home</a>
+	            	</li>
+	            	<li class="nav-item px-3">
+	             		<a class="nav-link" href="#" th:href="@{/task}">Tasks</a>
+	            	</li>
+	          	</ul>
+	          	<ul class="nav navbar-nav navbar-right flex-row mr-auto">
+	          		<li sec:authorize="isAnonymous()">
+	                	<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Hola
+	            	</li>
+	            	<li>
+	              		<a href="#" th:href="@{/perform_logout}">
+	                		<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout
+	              		</a>
+	            	</li>
+	          	</ul>
+	        </nav>
+		</div>
+	</body>
+</html>

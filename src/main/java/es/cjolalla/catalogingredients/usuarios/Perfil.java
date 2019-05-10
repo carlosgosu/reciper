@@ -1,5 +1,6 @@
 package es.cjolalla.catalogingredients.usuarios;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -12,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="perfil")
-public class Perfil {
+public class Perfil implements Serializable{
 
 	@Id
 	@Column(name="idPerfil")

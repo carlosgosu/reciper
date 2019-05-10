@@ -27,8 +27,13 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario usuario = usuarioRepo.findDistinctByUsuario(username);
-		UserPrincipal principal = new UserPrincipal(usuario);
-		return principal;
+		if (usuario != null) {
+			UserPrincipal principal = new UserPrincipal(usuario);
+			return principal;
+		} else {
+			throw new UsernameNotFoundException("User not found");
+		}
+		
 	}
 
 }
