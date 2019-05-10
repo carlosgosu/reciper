@@ -94,7 +94,6 @@ public class SecurityCatalogConfig extends WebSecurityConfigurerAdapter{
 //        .and()
 //        	.antMatcher("/ingredientes**")
 //        	.httpBasic(); //permitir autenticacion basica para las /reciper/api/**; //Si pusiera true de segundo parametro iria siempre a esta pagina despues de autenticarse aunque estuvieran intentando acceder a otra 
-
 	}
 	
 //	@Configuration
