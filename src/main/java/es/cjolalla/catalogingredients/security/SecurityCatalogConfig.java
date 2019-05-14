@@ -73,7 +73,7 @@ public class SecurityCatalogConfig extends WebSecurityConfigurerAdapter{
         .authorizeRequests()
         	//Spring Boot will, by default, permit access to /css/**, /js/**, /images/**, and /**/favicon.ico
         	//Incluimos el /built porque es donde genera el webpack el js
-        	.antMatchers(HttpMethod.GET,"/built/**", "/css/**", "/js/**").permitAll()
+        	.antMatchers(HttpMethod.GET,"/built/**", "/css/**", "/js/**","/img/**").permitAll()
         	.antMatchers("/info","/httptrace", "/","/login").permitAll()
         	.antMatchers("/console", "/console/**").permitAll()
         	.anyRequest().authenticated()
@@ -84,11 +84,11 @@ public class SecurityCatalogConfig extends WebSecurityConfigurerAdapter{
         	.loginPage("/autenticacion")
         	.permitAll()
         	.loginProcessingUrl("/login") //Por defecto la url de spring boot para esto es /login. La sobreescribimos
-        	.defaultSuccessUrl("/ingredientes", true)
+        	.defaultSuccessUrl("/autenticacion", true)
         .and()
         	.logout()
-        	.logoutUrl("/logout")
-        	.logoutSuccessUrl("/console");
+        	.logoutUrl("/perform_logout") //Por defecto es /logout
+        	.logoutSuccessUrl("/autenticacion");
 //        	.invalidateHttpSession(true)
 //        	.deleteCookies("JSESSIONID");
 //        .and()
@@ -96,17 +96,53 @@ public class SecurityCatalogConfig extends WebSecurityConfigurerAdapter{
 //        	.httpBasic(); //permitir autenticacion basica para las /reciper/api/**; //Si pusiera true de segundo parametro iria siempre a esta pagina despues de autenticarse aunque estuvieran intentando acceder a otra 
 	}
 	
-//	@Configuration
-//	@Order(2)
-//	public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
-//		  protected void configure(HttpSecurity http) throws Exception {
-//		      http
-//		          .antMatcher("/api/**")
-//		          .authorizeRequests()
-//		              .anyRequest().hasRole("ADMIN")
-//		              .and()
-//		          .httpBasic();
-//		  }
-//    }
+	
+	//Definimos varios entry points. La parte de la interfaz si no encuentra credenciales devolvera al formulario de login. La parte de la API rest la autenticacion sera con auth basica
+	//La que recoja urls mas especificas debe ir antes para no ensombrecer a las demas. Cada uno de los entry point es a dodne va a redirigir spring security cuando se intenta accesder a una
+	//zona protegida
+	@Configuration
+	@Order(1)
+	public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
+		  protected void configure(HttpSecurity http) throws Exception {
+		      http
+		          .antMatcher("/api/**")
+		          .authorizeRequests()
+		          	.anyRequest().authenticated()
+		          .and()
+		          	.httpBasic();
+		  }
+    }
+	
+	@Configuration
+	@Order(2)
+	public static class interfaceSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
+		  protected void configure(HttpSecurity http) throws Exception {
+			  http
+				//.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+				//.and()
+		        .csrf().disable()
+		        .authorizeRequests()
+		        	//Spring Boot will, by default, permit access to /css/**, /js/**, /images/**, and /**/favicon.ico
+		        	//Incluimos el /built porque es donde genera el webpack el js
+		        	.antMatchers(HttpMethod.GET,"/built/**", "/css/**", "/js/**","/img/**").permitAll()
+		        	.antMatchers("/info","/httptrace", "/","/login").permitAll()
+		        	.antMatchers("/console", "/console/**").permitAll()
+		        	.anyRequest().authenticated()
+		        .and()
+		        .headers().frameOptions().disable() //Esta linea hace falta para que se muestre la consla de h2 /console si esta configurada en el propoerties    
+		        .and()
+		        	.formLogin() //permitir autenticacion con formulario tambien (el index tendra un formulario y la accion que autenticara sera perfom_login)
+		        	.loginPage("/autenticacion")
+		        	.permitAll()
+		        	.loginProcessingUrl("/login") //Por defecto la url de spring boot para esto es /login. La sobreescribimos
+		        	.defaultSuccessUrl("/autenticacion", true)
+		        .and()
+		        	.logout()
+		        	.logoutUrl("/perform_logout") //Por defecto es /logout
+		        	.logoutSuccessUrl("/autenticacion")
+		        	.invalidateHttpSession(true)
+		        	.deleteCookies("JSESSIONID");
+		  }
+    }
 
 }

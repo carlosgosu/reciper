@@ -8,6 +8,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 import {Fragment} from 'react';
 import Login from './Login';
+//import FrontControl from './FrontControl';
 
 import {Container, Row, Col} from 'react-bootstrap';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'; //Una app que vaya en un browser debe importar react-router-dom en vez de react-router
@@ -19,6 +20,18 @@ class App extends React.Component {
 
 	constructor(props) {
 		super(props);
+		
+		this.state = {
+			logged: 'Hola'
+		}
+		
+		this.autenticarse = this.autenticarse.bind(this);
+	}
+	
+	autenticarse(){
+		this.setState({
+			logged: 'Adios'
+		});
 	}
 
 	render() {
@@ -30,7 +43,8 @@ class App extends React.Component {
 			<Container>
 				<Row>
 					<Col xs sm md lg={{ span: 6, offset: 3 }}>
-						<Route path="/" component={Login} />
+						<div>Hola {this.state.logged}</div>
+						<Route path="/" render={(props) => (<Login {...props} autenticarse={this.autenticarse}/>)} />
 					</Col>
 				</Row>
 			</Container>
@@ -41,8 +55,9 @@ class App extends React.Component {
 // end::app[]
 
 // tag::render[]
+//Pasamos la funcion que actualiza el estado de autenticacion al hijo para que desde el mismo pueda cambiar su valor
 ReactDOM.render(
-	<App />,
+	<App  />,
 	document.getElementById('react')
 )
 // end::render[]

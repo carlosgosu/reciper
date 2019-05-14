@@ -2,7 +2,9 @@ var path = require('path');
 
 //El entry va a ser como el main. sourcemaps es para que al debuggear el JS pueda enlazar con los fuentes. Se creara un bundle bungle.js con todos los ficheros
 module.exports = {
-    entry: './src/main/js/app.js',
+    entry: {
+    	main: './src/main/js/app.js'
+    },
     devtool: 'sourcemaps',
     cache: true,
     mode: 'development',

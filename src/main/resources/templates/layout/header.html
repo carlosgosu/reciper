@@ -6,7 +6,10 @@
   		th:href="@{/css/bootstrap.min.css}"
   		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
   		crossorigin="anonymous"/>
-	</head>
+  		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap-glyphicons.css">
+  		<!-- Bootstrap 4 ya no incluye glyphicons asi que usamos fontawesome -->
+  		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+  	</head>
 	<body th:fragment="header">
 		<div class="container">
 			<nav class="navbar navbar-fixed-top navbar-light bg-light navbar-toggleable-md">
@@ -16,16 +19,16 @@
 	              		<a class="nav-link" href="#" th:href="@{/}">Home</a>
 	            	</li>
 	            	<li class="nav-item px-3">
-	             		<a class="nav-link" href="#" th:href="@{/task}">Tasks</a>
+	             		<a class="nav-link" href="#" th:href="@{/admin}">Admin</a>
 	            	</li>
 	          	</ul>
-	          	<ul class="nav navbar-nav navbar-right flex-row mr-auto">
+	          	<ul class="nav navbar-nav navbar-right flex-row-reverse">
 	          		<li sec:authorize="isAnonymous()">
-	                	<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Hola
+	                	<span class="far fa-grin-wink" aria-hidden="true"></span>&nbsp;Login
 	            	</li>
-	            	<li>
+	            	<li sec:authorize="isAuthenticated()">
 	              		<a href="#" th:href="@{/perform_logout}">
-	                		<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout
+	                		<span class="far fa-grin-tongue" aria-hidden="true"></span>&nbsp;Logout
 	              		</a>
 	            	</li>
 	          	</ul>

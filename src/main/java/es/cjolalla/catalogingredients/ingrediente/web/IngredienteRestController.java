@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.cjolalla.catalogingredients.ingrediente.Ingrediente;
@@ -24,6 +25,7 @@ import es.cjolalla.catalogingredients.ingrediente.dto.IngredienteDTO;
 
 //Anotacion que equivale a @Controller + @ResponseBody
 @RestController
+@RequestMapping("/api")
 public class IngredienteRestController {
 	
 	Logger logger = LoggerFactory.getLogger(IngredienteRestController.class);
@@ -38,7 +40,7 @@ public class IngredienteRestController {
 	}
 	
 	@GetMapping(value= "/ingredientes")
-//	@PreAuthorize("hasRole('ADMIN') or hasAuthority('READ_INGREDIENTES')")
+	@PreAuthorize("hasRole('ADMIN') or hasAuthority('READ_INGREDIENTES')")
 	public List<IngredienteDTO> getAllIngredientes(Authentication authentication) {
 		//Para imprimir todos los permisos que tiene (y el perfil que tambien es una granted authority)
 		//logger.info(authentication.getAuthorities().stream().map(auth -> auth.getAuthority()).collect(Collectors.joining(", ","{","}")));

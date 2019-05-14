@@ -51,6 +51,7 @@ class Login extends Component {
 		fetch(this.loginForm.current.action, ajaxParams)
 		.then( (response) => {
 				if (response.redirected){ 
+					this.props.autenticarse();
 					//La respuesta de spring security es una redireccion (302)
 					window.location = response.url;
 				}
@@ -66,30 +67,32 @@ class Login extends Component {
 		}
 		return (
 			<Fragment>
-			<div className="panel panel-default">
+			<div className="card mt-5 text-white">
+				<img src="img/pizza.jpg" className="card-img" alt="..."/>
+				<div className="card-body card-img-overlay">
 				<form onSubmit={this.handleSubmit} action="/reciper/login" ref={this.loginForm} id="formLoginId">
 					<Form.Group as={Row} controlId="formLogin">
-						<Form.Label column xs sm md lg={2}>User</Form.Label>
-						<Col sm={10}>
+						<Form.Label column xs sm md lg={4}>User</Form.Label>
+						<Col sm={8}>
 						<Form.Control name="username" type="text" placeholder="Login" />
 						</Col>		
 					</Form.Group>
 					<Form.Group as={Row} controlId="formPassword">
-						<Form.Label column xs sm md lg={2}>Password</Form.Label>
-						<Col sm={10}>
+						<Form.Label column xs sm md lg={4}>Password</Form.Label>
+						<Col sm={8}>
 						<Form.Control name="password" type="password" placeholder="Password" />
 						</Col>
 					</Form.Group>
 					<Row>
 						<Col xs sm md lg={3}>
-							<Button variant="outline-primary" size="lg" type="submit" block>Log in</Button>
+							<Button variant="primary" size="lg" type="submit" block>Log in</Button>
 						</Col>
 						<Col xs sm md lg={9}>
 							<LoginLogout error={alerta} />
 						</Col>
 					</Row>
 				</form>
-				
+				</div>
 			</div>
 			</Fragment>
 		)

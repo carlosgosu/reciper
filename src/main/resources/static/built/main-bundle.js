@@ -46660,8 +46660,6 @@ function (_Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(event) {
-      var _this2 = this;
-
       event.preventDefault(); //FormData y URLSearchParams son interfaces de ECMA6. FormData construye un conjunto de pares clave/valor que representan campos (si se le pasa un form introduce sus inputs)
       //URLSearchParams se usa para trabajar con los parametros de una URL
 
@@ -46676,9 +46674,7 @@ function (_Component) {
       };
       fetch(this.loginForm.current.action, ajaxParams).then(function (response) {
         if (response.redirected) {
-          _this2.props.autenticarse(); //La respuesta de spring security es una redireccion (302)
-
-
+          //La respuesta de spring security es una redireccion (302)
           window.location = response.url;
         }
       })["catch"](function (e) {
@@ -46867,8 +46863,6 @@ __webpack_require__.r(__webpack_exports__);
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -46877,9 +46871,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -46890,7 +46884,6 @@ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 
 
- //import FrontControl from './FrontControl';
 
 
  //Una app que vaya en un browser debe importar react-router-dom en vez de react-router
@@ -46903,30 +46896,14 @@ function (_React$Component) {
   _inherits(App, _React$Component);
 
   function App(props) {
-    var _this;
-
     _classCallCheck(this, App);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
-    _this.state = {
-      logged: 'Hola'
-    };
-    _this.autenticarse = _this.autenticarse.bind(_assertThisInitialized(_this));
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
   }
 
   _createClass(App, [{
-    key: "autenticarse",
-    value: function autenticarse() {
-      this.setState({
-        logged: 'Adios'
-      });
-    }
-  }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       //Los componentes JSX no se pueden devolver directamente en el return. Siempre tienen que estar dentro de algun contenedor (un <div> por ejemplo). Para saltarnos esa limitacion usamos <Fragment> o <Container> de react-bootstrap
       //Estamos pasando al componente Login el error que devuelve spring security en la autenticacion (lo devuelve como un parametro)
       //Vamos a usar un Route en vez de poner <Login /> para que en el componente Login pueda tener informacion de los parametros de la URL (el error de spring sec)
@@ -46938,13 +46915,9 @@ function (_React$Component) {
           span: 6,
           offset: 3
         }
-      }, React.createElement("div", null, "Hola ", this.state.logged), React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+      }, React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
         path: "/",
-        render: function render(props) {
-          return React.createElement(_Login__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({}, props, {
-            autenticarse: _this2.autenticarse
-          }));
-        }
+        component: _Login__WEBPACK_IMPORTED_MODULE_1__["default"]
       })))));
     }
   }]);
@@ -46952,7 +46925,6 @@ function (_React$Component) {
   return App;
 }(React.Component); // end::app[]
 // tag::render[]
-//Pasamos la funcion que actualiza el estado de autenticacion al hijo para que desde el mismo pueda cambiar su valor
 
 
 ReactDOM.render(React.createElement(App, null), document.getElementById('react')); // end::render[]
@@ -46960,4 +46932,4 @@ ReactDOM.render(React.createElement(App, null), document.getElementById('react')
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map
+//# sourceMappingURL=main-bundle.js.map
