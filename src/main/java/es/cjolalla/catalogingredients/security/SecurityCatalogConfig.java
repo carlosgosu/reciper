@@ -126,7 +126,7 @@ public class SecurityCatalogConfig extends WebSecurityConfigurerAdapter{
 		        	//Incluimos el /built porque es donde genera el webpack el js
 		        	.antMatchers(HttpMethod.GET,"/built/**", "/css/**", "/js/**","/img/**").permitAll()
 		        	.antMatchers("/info","/httptrace", "/","/login").permitAll()
-		        	.antMatchers("/console", "/console/**").permitAll()
+		        	.antMatchers("/console", "/console/**","/isLogged").permitAll()
 		        	.anyRequest().authenticated()
 		        .and()
 		        .headers().frameOptions().disable() //Esta linea hace falta para que se muestre la consla de h2 /console si esta configurada en el propoerties    

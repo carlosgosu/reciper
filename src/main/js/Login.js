@@ -10,6 +10,8 @@ class Login extends Component {
 	constructor(props){
 		super(props);
 		
+		console.log('Bla:' + props.logged);
+		
 		this.state = {
 			error: false,
 			errorDesc: ''
@@ -51,7 +53,6 @@ class Login extends Component {
 		fetch(this.loginForm.current.action, ajaxParams)
 		.then( (response) => {
 				if (response.redirected){ 
-					this.props.autenticarse();
 					//La respuesta de spring security es una redireccion (302)
 					window.location = response.url;
 				}
@@ -88,7 +89,7 @@ class Login extends Component {
 							<Button variant="primary" size="lg" type="submit" block>Log in</Button>
 						</Col>
 						<Col xs sm md lg={9}>
-							<LoginLogout error={alerta} />
+							<LoginLogout error={this.state.error} logged={this.props.logged}/>
 						</Col>
 					</Row>
 				</form>

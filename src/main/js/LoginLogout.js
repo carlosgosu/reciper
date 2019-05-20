@@ -9,7 +9,8 @@ import {Fragment} from 'react';
 class LoginLogout extends Component {
 	constructor(props){
 		super(props);
-
+		console.log(props.error);
+		console.log(props.logged);
 	}
 	
 	
@@ -17,8 +18,9 @@ class LoginLogout extends Component {
 		let alerta;
 		if (this.props.error){
 			alerta = <Alert variant="danger">Incorrect User/Password</Alert>;
+		} else if (this.props.logged){
+			alerta = <Alert variant="success">Logged in!</Alert>;
 		}
-		console.log(this.props);
 		return (
 			<Fragment>
 				{alerta}
